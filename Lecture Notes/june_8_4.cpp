@@ -10,7 +10,8 @@ struct st{
 
 
 int main(){
-    
+    // next = 0;
+    // next = new st;
 
     return 0;
 }

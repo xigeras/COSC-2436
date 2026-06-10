@@ -12,12 +12,15 @@ int main() {
         int max = 0;
         int temp = n;
 
-        while (int d = temp % 10 != 0) {
-            d = max;
+        while (temp > 0) {
+            int d = temp % 10;
+            if (d > max) {
+                max = d;
+            }
+            temp = temp / 10;
         }
-        
-
-
+        n = n - max;
+        count++;
     }
 
 

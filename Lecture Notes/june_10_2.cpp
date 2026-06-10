@@ -44,36 +44,27 @@ class Dealership{
             }
         }
         void deleteAll();
+        int countCars(car *curr) {
+            if (curr == 0) {
+                return 0;
+            } else {
+                return 1 + countCars(curr->next);
+            }
+        }
+
 
 
 };
 
-int main() {
+// count the number of nodes in a linked list recursively
 
+// member or non member function. needs argument (head)
+
+
+int main() {
+    Dealership rizk;
+    cout << rizk.countCars(rizk.getHead());
+    cout << countCars(rizk.getHead());
+    
     return 0;
 }
-
-
-// delete: mark, empty, update pointers, delete tmp
-
-
-//  --- recursion ---
-
-//          1. repetition
-//          2. condition to stop (if cond to stop, value. else, repeat and change smth)
-//          3. if we don't stop, we repeat the repetition + change size
-
-
-/*
-int m (int a, int b) {
-    if (b == 0) {
-        return 0; 
-    } else {
-        return a + m(a, b - 1);
-    }
-}
-*/
-
-
-// practice: count iterations
-

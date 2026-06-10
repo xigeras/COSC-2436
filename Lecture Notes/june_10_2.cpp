@@ -65,6 +65,6 @@ int main() {
     Dealership rizk;
     cout << rizk.countCars(rizk.getHead());
     cout << countCars(rizk.getHead());
-    
+
     return 0;
 }

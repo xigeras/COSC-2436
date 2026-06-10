@@ -2,12 +2,26 @@
 
 using namespace std;
 
-struct Node{
+struct point{
+    int x;
+    int y;
+    point *next;
+};
 
+class line{
+    private:
+        point *head;
+    public: 
+        line();
+        void insertPoint(int x, int y);
+        void print();
+        bool searchRecursively(point *, int vx);
 }
 
 int main() {
-
+    line straight;
+    // after you do all that shit..
+    //cout << straight.srec(straight.gethead(), 5);
     return 0;
 }
 
@@ -56,6 +70,19 @@ void printBackwards(car *curr) {
     } else {
         printBackwards(curr->next);
         cout << curr->price << endl;
+    }
+}
+*/
+
+/*
+bool searchRecursively(car* curr, int number) {
+    if (curr == 0){
+        return 0;
+    }
+    else if (curr->price == number) {
+        return 1; //YAY 
+    } else {
+        return searchRecursively(curr->next, number);
     }
 }
 */

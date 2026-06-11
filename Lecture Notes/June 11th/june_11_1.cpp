@@ -7,7 +7,7 @@
     // code cant go too fast. cant go exponential. very bad
     // if our code is constant (no growth), best!
     // though linear is the PREFERRED execution time b/c it grows slowly
-// 2. How many spaces/bytes will this code take?
+// 2. How many spaces/bytes will this code take? (space complexity)
 
 //Write myName
 
@@ -19,7 +19,7 @@ int a;
 int a - 10;
 cout << a;
 a += 7
-cout << 
+cout << a;
 */
 
 
@@ -121,4 +121,32 @@ m = 3 + 5 / 2 = 4
 
 75
 
+*/
+
+
+
+
+/*
+==== SORTING ====
+
+[5, 1, 3, 2, 4] Bubble Sort
+[1, 5, 3, 2, 4] Pass 1
+[1, 3, 5, 2, 4]
+[1, 3, 2, 5, 4]
+[1, 3, 2, 4, 5]
+
+[1, 3, 2, 4, 5] Pass 2
+[1, 2, 3, 4, 5]
+
+[1, 2, 3, 4, 5] Pass 3 (just checking at this point tbh)
+
+[1, 2, 3, 4, 5] Pass 4 
+sorted! 
+
+What is Big O of Bubble Sort?
+
+(n-1) passes, each pass we have n. time complexity is O(n^2)
+Best case: O(n^2)
+Worst case:  5 4 3 2 1... O(n^2)
+Average case: 
 */

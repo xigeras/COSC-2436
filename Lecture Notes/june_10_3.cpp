@@ -15,7 +15,16 @@ class line{
         line();
         void insertPoint(int x, int y);
         void print();
-        bool searchRecursively(point *, int vx);
+        bool searchRecursively(point *, int vx) {
+            if (curr == 0) {
+                return false;
+            }
+            else if (curr->x == vx) {
+                return true;
+            } else {
+                return searchRecursively(curr->next, vx);
+            }
+        }
 }
 
 int main() {
@@ -86,3 +95,11 @@ bool searchRecursively(car* curr, int number) {
     }
 }
 */
+
+
+
+// PRACTICE: a linked list of characters, delete every other character.
+// example: hello how are you -> hlohwaeyu -> howeu -> hwu -> hu -> h -> 
+
+
+// ask user to give sentence

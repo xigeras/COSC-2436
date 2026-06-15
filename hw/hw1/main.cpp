@@ -12,6 +12,14 @@ struct credential{
     int deposit;
     int drinks;
     credential* next;
+
+    credential(string n , int a, int dep, int dr) {
+        name = n;
+        age = a;
+        deposit = dep;
+        drinks = dr;
+        next = nullptr;
+    }
 };
 
 class Casino{
@@ -189,9 +197,17 @@ int main(int argc, char* argv[]) {
             int n = stoi(line.substr(line.find("(") + 1, line.find(")") - line.find("(") - 1));
             parseString(line, name, age, deposit, drinks);
             db.addatIndex(name, age, deposit, drinks, n);
-        } else if (line.find("Remove") != string::npos) {
-            string attr = line.substr(line.find("[") + 1, line.find(":") - line.find("[") - 1);
-            string val = line.substr(line.find(": ") + 2, line.find("]") - line.find(": ") - 2);
+        } else if (line.find("Remove") != string::npos)  {
+
+            int start = line.find("[") != string::npos ? line.find("[") : line.find("(");
+            // Find the closing bracket OR parenthesis
+            int end = line.find("]") != string::npos ? line.find("]") : line.find(")");
+            int colon = line.find(":");
+
+            // Slice out the attribute and value using those dynamic positions
+            string attr = line.substr(start + 1, colon - start - 1);
+            string val = line.substr(colon + 2, end - colon - 2);
+            
             db.removebyAttribute(attr, val);
         } else if (line.find("Sort") != string::npos) {
             string attr = line.substr(line.find("(") + 1, line.find(")") - line.find("(") - 1);

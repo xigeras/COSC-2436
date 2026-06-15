@@ -30,6 +30,56 @@ class LinkedList {
             if (n %) // number % 2 == 0 validates eve
             
         }
+        Node* detectCycle(Node* head) {
+            if (head == nullptr || head->next == nullptr) {
+                return nullptr;
+            }
+
+            ListNode* slow = head;
+            ListNode* fast = head;
+
+            while (fast != nullptr && fast->next != nullptr) {
+                slow = slow->next;
+                fast = fast->next->next;
+
+                if (slow == fast) {
+                    ListNode* entry = head;
+                    while (entry != slow) {
+                        entry = entry->next;
+                        slow = slow->next;
+                    }
+                    return entry;
+                }
+            }
+            return nullptr;
+        }
+        Node* reverseList(Node* head){
+            ListNode* curr = head;
+            ListNode* prev = nullptr;
+            while (curr != nullptr) {
+                ListNode* next = curr->next;
+                curr->next = prev;
+                prev = curr;
+                curr = next;
+            }
+            return prev;
+        }
+        Node* middleNode(Node* head) {
+            if (!head || head->next == nullptr) {
+                return head;
+            }
+            if (head->next->next == nullptr)
+                return head->next;
+            
+            ListNode* fast = head;
+            ListNode* slow = head;
+
+            while (fast != nullptr && fast->next != nullptr) {
+                slow = slow->next;
+                fast = fast->next->next;
+            }
+            return slow;
+        }
 }
 int main() {
 

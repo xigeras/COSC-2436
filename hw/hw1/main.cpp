@@ -18,7 +18,7 @@ class Casino{
     private:
         credential* head;
     public:
-        Casino();
+        Casino() { head = nullptr; }
         credential* getHead() { return head; }
         void searchDuplicates(string targetName, int targetAge) {
             credential* curr = head;

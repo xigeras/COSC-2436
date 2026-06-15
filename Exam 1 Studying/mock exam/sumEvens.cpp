@@ -26,8 +26,13 @@ class LinkedList {
             if (head == nullptr) {
                 return 0;
             }
-            
-            if (n %) // number % 2 == 0 validates eve
+            Node* curr = head;
+            int current_val = 0;
+            if (curr->data % 2 == 0 ) {
+                current_val = curr->data;
+            }
+
+            return current_val + sumEvens(curr->next);
             
         }
         Node* detectCycle(Node* head) {
@@ -71,14 +76,26 @@ class LinkedList {
             if (head->next->next == nullptr)
                 return head->next;
             
-            ListNode* fast = head;
-            ListNode* slow = head;
+            Node* fast = head;
+            Node* slow = head;
 
             while (fast != nullptr && fast->next != nullptr) {
                 slow = slow->next;
                 fast = fast->next->next;
             }
             return slow;
+        }
+        Node* mergeTwoLists(Node* h1, Node* h2) {
+            if (h1 == nullptr) { return h2; }
+            if (h2 == nullptr) { return h1; }
+
+            if (h1->val < h2->val) {
+                h1->next = mergeTwoLists(h1->next, h2);
+                return h1; 
+            } else {
+                h2->next = mergeTwoLists(h1, h2->next);
+                return h2;
+            }
         }
 }
 int main() {

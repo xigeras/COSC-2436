@@ -43,3 +43,12 @@ int printBackwards(int n) {
     cout << n << endl;
     printBackwards(n - 1);
 }
+
+
+int power(int base, int exp) {
+    if (exp == 0) {
+        return 1;
+    }
+
+    return base * exp(base, exp - 1);
+}

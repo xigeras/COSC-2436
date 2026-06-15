@@ -115,5 +115,25 @@ class doublyList{
 
             
         }
+        void insertAfterValue(Node* head, int target, int newVal) {
+            Node* curr = head;
+
+            while (curr != nullptr && curr->val != target) {
+                curr = curr->next;
+            }
+
+            if (curr != nullptr) {
+                Node* tmp = new Node();
+                tmp->val = newVal;
+
+                tmp->next = curr->next;
+                tmp->prev = curr;
+
+                if (curr->next != nullptr) {
+                    curr->next->prev = tmp;
+                }
+                curr->next = tmp;
+            }
+        }
 
 }

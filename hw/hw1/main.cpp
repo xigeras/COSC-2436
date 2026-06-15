@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <algorithm>
  
 using namespace std;
 
@@ -30,15 +31,15 @@ class Casino{
             }
             return nullptr;
         }
-        void addatIndex(string a, int b, int c, int d, int index) {
-            credential* duplicate = searchDuplicates(a, b);
+        void addatIndex(string name, int age, int deposit, int drinks, int index) {
+            credential* duplicate = searchDuplicates(name, age);
             if (duplicate != nullptr) {
-                duplicate->c = deposit;
-                duplicate->d = drinks;
+                duplicate->deposit = deposit;
+                duplicate->drinks = drinks;
                 return;
             }
 
-            credential* tmp = new credential(a, b, c, d);
+            credential* tmp = new credential(name, age, deposit, drinks);
 
             if (index == 0 || head == nullptr) {
                 tmp->next = head;
@@ -175,7 +176,7 @@ int main(int argc, char* argv[]) {
         if (line.empty()) continue;
 
         parseString(line, name, age, deposit, drinks);
-        db.addAtIndex(999999, name, age, deposit, drinks);
+        db.addatIndex(name, age, deposit, drinks, 999999);
     }
 
     while (getline(cmd, line)) {
@@ -187,7 +188,7 @@ int main(int argc, char* argv[]) {
         if (line.find("Add") != string::npos) {
             int n = stoi(line.substr(line.find("(") + 1, line.find(")") - line.find("(") - 1));
             parseString(line, name, age, deposit, drinks);
-            db.addatIndex(n, name, age, deposit, drinks);
+            db.addatIndex(name, age, deposit, drinks, n);
         } else if (line.find("Remove") != string::npos) {
             string attr = line.substr(line.find("[") + 1, line.find(":") - line.find("[") - 1);
             string val = line.substr(line.find(": ") + 2, line.find("]") - line.find(": ") - 2);

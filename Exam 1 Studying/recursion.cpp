@@ -26,3 +26,20 @@ bool isPalindrome(string str) {
     }
     return isPalindrome(str.substr(1, str.size() - 2));
 }
+
+
+
+int sumOfDigits(int n) {
+    if (n == 1) {
+        return 1;
+    }
+    return n + sumOfDigits(n-1);
+}
+
+int printBackwards(int n) {
+    if (n == 1) 
+        return 1;
+    
+    cout << n << endl;
+    printBackwards(n - 1);
+}

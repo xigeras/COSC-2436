@@ -20,7 +20,7 @@ class Casino{
     public:
         Casino() { head = nullptr; }
         credential* getHead() { return head; }
-        void searchDuplicates(string targetName, int targetAge) {
+        credential* searchDuplicates(string targetName, int targetAge) {
             credential* curr = head;
 
             while (curr != nullptr) {

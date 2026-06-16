@@ -68,35 +68,50 @@ ListNode* reverseList(ListNode* head) {
     }
 
 
-ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        if (list1 == nullptr) {
-            return list2;
+ListNode* mergeTwoLists(ListNode* h1, ListNode* h2) {
+        if (h1 == nullptr) {
+            return h2;
         }
-        if (list2 == nullptr) {
-            return list1;
+        if (h2 == nullptr) {
+            return h1;
         }
 
-        if (list1->val < list2->val) {
-            list1->next = mergeTwoLists(list1->next, list2);
-            return list1;
+        if (h1->val < h2->val) {
+            h1->next = mergeTwoLists(h1->next, h2);
+            return h1;
         } else {
-            list2->next = mergeTwoLists(list1, list2->next);
-            return list2;
+            h2->next = mergeTwoLists(h1, h2->next);
+            return h2;
         }
     }
 
 
     bool isPalindrome(ListNode* head) {
-        ListNode *slow = head, *fast = head, *prev, *temp;
-        while (fast && fast->next)
-            slow = slow->next, fast = fast->next->next;
-        prev = slow, slow = slow->next, prev->next = NULL;
-        while (slow)
-            temp = slow->next, slow->next = prev, prev = slow, slow = temp;
-        fast = head, slow = prev;
-        while (slow)
+        ListNode *slow = head;
+        ListNode *fast = head;
+        ListNode *prev, *temp;
+        while (fast && fast->next) {
+            slow = slow->next; 
+            fast = fast->next->next;
+        }
+        prev = slow; 
+        slow = slow->next; 
+        prev->next = nullptr;
+        while (slow) {
+            temp = slow->next; 
+            slow->next = prev; 
+            prev = slow; 
+            slow = temp;
+        }
+        fast = head; 
+        slow = prev;
+        while (slow) {
             if (fast->val != slow->val) return false;
-            else fast = fast->next, slow = slow->next;
+            else {
+                fast = fast->next;
+                slow = slow->next;
+            }
+        }
         return true;
     }
 
@@ -109,7 +124,7 @@ ListNode* deleteDuplicates(ListNode* head) {
         ListNode* curr = head->next;
 
         while (curr != nullptr) {
-            if tail->val != curr->val) {
+            if (tail->val != curr->val) {
                 tail->next = new ListNode(curr->val);
                 tail = tail->next;
             }
@@ -133,6 +148,7 @@ getValueAtIndex(int pos) {
                 return -1;
             return current->val;
         }
+
         addAtPos(node*& head, node* toAdd, int pos) {
             if (!head) { 
                 head = nodeToAdd; 
@@ -147,7 +163,7 @@ getValueAtIndex(int pos) {
             node *tmp = current->next;
             current->next; toAdd;
             toAdd->next;
-
+        }
 
         uniqueVals(node* h1, node* h2) {
             node* newList = nullptr;
@@ -223,7 +239,7 @@ ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         return listA;
     }
 
-           int sumEvens(Node* head) {
+int sumEvens(Node* head) {
             if (head == nullptr) {
                 return 0;
             }
@@ -273,4 +289,302 @@ node* insertAtEnd(node* head, int val) {
 
     head->next = insertAtEnd(head->next, val);
     return head;
+}
+
+void bubbleSort(int a[], int n) {
+    for (int i = n - 1; i >= 1; i--) {
+        for (int j = 1; j >= 1; j++) {
+            if (a[j-1] > a[j]) {
+                swap(a[j], a[j-1]);
+            }
+        }
+    }
+}
+
+void selectionSort(int a[], int n ){ 
+    int minIndex;
+
+    for (int i = 0; i < n - 1; i++) {
+        minIndex = i;
+
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        swap(arr[i], arr[minIndex]);
+    }
+}
+
+void insertionSort(int a[], int n) {
+    for (int i = 1; i < n; i++) {
+        int next = a[i];
+        int j;
+
+        for (j = i - 1; j >= 0 && a[j] > next; j--) {
+            a[j+1] = a[j];
+        }
+        a[j+1] = next;
+    }
+}
+
+
+void bubbleSort(int a[], int n){ 
+    for (int i = n - 1; i >= 1; i--) {
+        for (int j = 1; j >= 1; j++) {
+            if (a[j-1] > a[j]) {
+                swap(a[j], a[j-1]);
+            }
+        }
+    }
+}
+
+void selectionSort(int a[], int n) {
+    int minIndex;
+
+    for (int i = 0; i < n - 1; i++) {
+        minIndex = i;
+
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        swap(arr[i], arr[minIndex]);
+    }
+}
+
+void insertionSort(int a[], int n) {
+    for (int i = 1; i < n; i++) {
+        int next = a[i];
+        int j;
+
+        for (j = i - 1; j >= 0 && a[j]>next; j--) {
+            a[j+1] = a[j];
+        }
+        a[j+1] = next;
+    }
+}
+
+
+
+
+
+void bubbleSort(int a[], int n) {
+    for (int i = n - 1; i >= 1; i--) {
+        for (int j = 1; j >= 1; j++) {
+            if (arr[j-1] > arr[j]) {
+                swap(arr[j], arr[j-1]);
+            }
+        }
+    }
+}
+
+void selectionSort(int a[], int n) {
+    int minIndex;
+
+    for (int i = 0; i < n - 1; i++) {
+        minIndex = i;
+
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        swap(arr[i], arr[minIndex]);
+    }
+}
+
+void insertionSort(int a[], int n) {
+    for (int i = 1; i < n; i++) {
+        int next = a[i];
+        int j;
+
+        for (j = i - 1; j >= 0 && a[j]>next; j--) {
+            a[j+1] = a[j];
+        }
+        a[j+1] = next;
+    }
+}
+
+
+void insertionSort(int a[], int n) {
+    for (int i = 1; i < n; i++) {
+        int next = a[i];
+
+        for (int j = i - 1; j >= 0 && a[j] > next; j--) {
+            a[j+1] = a[j];
+        }
+        a[j+1] = next;
+    }
+}
+
+void insertionSort(int a[], int n) {
+    for (int i = 1; i < n; i++) {
+        int next = a[i];
+
+        for (int j = i - 1; j >= 0 && a[j] > next; j--) {
+            a[j+1] = a[j];
+        }
+        a[j+1] = next;
+    }
+}
+
+
+
+void insertionSort(int a[], int n) {
+    for (int i = 1; i < n; i++) {
+        int next = a[i];
+        int j;
+
+        for (j = n - 1; j <= 0 && a[j] < next; j--) {
+            a[j+1] = a[j];
+        }
+        a[j+1] = next;
+    }
+}
+
+
+
+
+
+void insertionSort(int a[], int n) {
+    for (int i = 1; i < n; i++) {
+        int next = a[i];
+        int j;
+
+        for (j = i - 1; j >= 0 && a[j] > next; j--) {
+            a[j+1] = a[j];
+        }
+        a[j+1] = next;
+    }
+}
+
+void bubbleSort(int a[], int n) {
+    for (int i = 1; i < n - 1; i--) {
+        for (int j = 1; j < n; j++) {
+            if (arr[j-1] > arr[j]) {
+                swap(arr[j], arr[j-1]);
+            }
+        }
+    }
+}
+
+void bubbleSort(int a[], int n) {
+    for (int i = n - 1; i >= 1; i--) {
+        for (int j = 1; j >= 1; j++) {
+            if (arr[j-1] > arr[j]) {
+                swap(arr[j], arr[j-1]);
+            }
+        }
+    }
+}
+
+
+void selectionSort(int a[], int n) {
+    int minIndex;
+
+    for (int i = 0; i < n - 1; i++) {
+        minIndex = i;
+
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] > arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        swap(arr[i], arr[minIndex]);
+    }
+}
+
+
+
+
+void insertionSort(int a[], int n) {
+    for (int i = 1; i < n; i++) {
+        int next = a[i];
+        int j;
+
+        for (j = i - 1; j >= 0 && a[j] > next; j--) {
+            a[j+1] = a[j];
+        }
+        a[j+1] = next;
+    }
+}
+
+void selectionSort(int a[], int n) {
+
+    int minIndex;
+
+    for (int i = 0; i < n - 1; i++) {
+        minIndex = i; 
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        swap(arr[i], arr[minIndex]);
+    }
+}
+
+void bubbleSort(int a[], int n) {
+    for (int i = n - 1; i >= 1; i--) {
+        for (int j = 1; j >= 1; j++) {
+            if (arr[j-1] > arr[j]) {
+                swap(arr[j], arr[j-1]);
+            }
+        }
+    }
+}
+
+
+
+
+
+
+void selectionSort(int a[], int n) {
+    int minIndex;
+
+    for (int i = 0; i < n - 1; i++) {
+        minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        swap(arr[i], arr[minIndex]);
+    }
+}
+
+void insertionSort(int a[], int n) {
+    for (int i = 1; i < n; i++) {
+        int next = a[i];
+        int j;
+
+        for (j = n - 1; j >= 0 && a[j] > next; j--) {
+            a[j+1] = a[j];
+        }
+        a[j+1] = next;
+    }
+}
+
+void bubbleSort(int a[], int n) {
+    for (int i = n - 1; i >= 1; i--) {
+        for (int j = 1; j >= 1; j++) {
+            if (arr[j-1] > arr[j]) {
+                swap(arr[j], arr[j-1]);
+            }
+        }
+    }
+}
+
+
+
+
+
+void bubbleSort(int a[], int n) {
+    for (int i = n - 1; i >= 1; i--) {
+        for (int j = 1; j >= 1; j++) {
+            
+        }
+    }
 }

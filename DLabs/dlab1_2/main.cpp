@@ -7,8 +7,11 @@ int main() {
     cin >> n;
     
     long long moves = 0;
-
     int *arr = new int[n];
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
 
     for (int i = 1; i < n; i++) {
         while (arr[i] < arr[i-1]) {

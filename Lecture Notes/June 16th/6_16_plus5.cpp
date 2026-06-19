@@ -28,7 +28,7 @@ class Stack{
         bool isEmpty() {
             return top == -1;
         }
-}
+};
 
 int pos(char x[], int n, char readchar) {
     for (int i = 0; i < n; i++) {
@@ -129,9 +129,11 @@ int evaluatePostfix(string postfix) {
 
 int main() {
     int choice = -1;
-    string expression = "";
+    char expression[100];
+    expression[0] = '\0';
+    char continueRun = 'y';
     
-    while (choice != 5) {
+    while (tolower(continueRun) == 'y') {
         cout << "\n----- MENU -----" << endl;
         cout << "1 - Read an infix expression" << endl;
         cout << "2 - Convert Infix to Postfix" << endl;
@@ -151,34 +153,45 @@ int main() {
 
         cin.ignore(1000, '\n');
 
+        if (choice == 5) {
+            cout << "Exiting..." << endl;
+            break;
+        }
+
         switch(choice) {
             case 1: 
                 cout << "Enter an expression: ";
-                getline(cin, expression);
+                cin.getline(expression, 100);
                 break;
             case 2: 
-                if (expression.empty()) cout << "Error: Read an expression first (Option 1)." << endl;
+                if (expression[0] == '\0') cout << "Error: Read an expression first (Option 1)." << endl;
                 else cout << "Postfix Result: " << infixToPostfix(expression) << endl;
                 break;
             case 3: 
-                if (expression.empty()) cout << "Error: Read an expression first (Option 1)." << endl;
-                else cout << "Evaluation Result: " << evaluatePostfix(expression) << endl;
+                if (expression[0] == '\0') { 
+                    cout << "Error: Read an expression first (Option 1)." << endl;
+                } else {
+                    string postfixStr = infixToPostfix(expression);
+                    cout << "Evaluation Result: " << evaluatePostfix(postfixStr) << endl;
+                }
                 break;
             case 4: 
-                if (expression.empty()) {
+                if (expression[0] == '\0') {
                     cout << "Error: Read an expression first (Option 1)." << endl;
                 } else {
                     if (isBalanced(expression)) cout << "Result: The expression IS balanced." << endl;
                     else cout << "Result: The expression is NOT balanced." << endl;
                 }
                 break;
-            case 5:
-                cout << "Exiting..." << endl;
-                break;
             default: 
                 cout << "Invalid choice. Try again." << endl;
                 break;    
         }
+
+        cout << "\nDo you want to continue? (y/n): ";
+        cin >> continueRun;
+
+        cin.ignore(1000, '\n');
     }
 
     return 0;

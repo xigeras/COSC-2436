@@ -108,11 +108,78 @@ string infixToPostfix(string infix) {
 int evaluatePostfix(string postfix) {
     Stack s(postfix.length());
 
-    for 
+    for (char ch : postfix) {
+        if (isspace(ch)) continue;
+
+        if (isdigit(ch)) {
+            s.push(ch - '0');
+        } else {
+            int v2 = s.pop(), v1 = s.pop();
+
+            switch (ch) {
+                case '+': s.push(v1 + v2); break;
+                case '-': s.push(v1 - v2); break;
+                case '*': s.push(v1 * v2); break;
+                case '/': s.push(v2 ? v1 / v2 : 0); break;
+            }
+        }
+    } 
+    return s.pop();
 }
 
 int main() {
+    int choice = -1;
+    string expression = "";
+    
+    while (choice != 5) {
+        cout << "\n----- MENU -----" << endl;
+        cout << "1 - Read an infix expression" << endl;
+        cout << "2 - Convert Infix to Postfix" << endl;
+        cout << "3 - Evaluate Postfix" << endl;
+        cout << "4 - Check if the expression is balanced" << endl;
+        cout << "5 - Exit" << endl;
 
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Invalid input. Enter a number." << endl;
+            continue;
+        }
+
+        cin.ignore(1000, '\n');
+
+        switch(choice) {
+            case 1: 
+                cout << "Enter an expression: ";
+                getline(cin, expression);
+                break;
+            case 2: 
+                if (expression.empty()) cout << "Error: Read an expression first (Option 1)." << endl;
+                else cout << "Postfix Result: " << infixToPostfix(expression) << endl;
+                break;
+            case 3: 
+                if (expression.empty()) cout << "Error: Read an expression first (Option 1)." << endl;
+                else cout << "Evaluation Result: " << evaluatePostfix(expression) << endl;
+                break;
+            case 4: 
+                if (expression.empty()) {
+                    cout << "Error: Read an expression first (Option 1)." << endl;
+                } else {
+                    if (isBalanced(expression)) cout << "Result: The expression IS balanced." << endl;
+                    else cout << "Result: The expression is NOT balanced." << endl;
+                }
+                break;
+            case 5:
+                cout << "Exiting..." << endl;
+                break;
+            default: 
+                cout << "Invalid choice. Try again." << endl;
+                break;    
+        }
+    }
 
     return 0;
 }

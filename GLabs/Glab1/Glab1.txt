@@ -1,0 +1,63 @@
+Glab1_1
+---------------------------------------------------------
+Name of the Problem: Binary Ruler Subdivisions
+Time Limit: 1.00 s Memory Limit: 512 MB
+
+The process of drawing a structural ruler of depth n is inherently recursive. To construct it, you must first draw a ruler of depth n - 1,
+then place a major mark on length n at the current midpoint, and  finally draw another ruler of depth n - 1.
+
+Your task is to find the total number of marks drawn and output the sequence of mark lengths generated during this process for a given depth n.
+
+Input
+The only input line has integer n (depth of the ruler).
+
+Output
+First, print an integer k: the total number of marks drawn.
+After this, print a single line containing k space-separated integers describing the length of each mark in the order they are drawn.
+
+Constraints
+1 <= n <= 16
+
+Example
+Input:
+2
+
+Output:
+3
+1 2 1
+
+
+August Backman
+
+
+
+Glab1_2
+---------------------------------------------------------
+Name of the Problem: Balancing Alternating Signatures
+Time Limit: 1.00 s Memory Limit: 512 MB
+
+You are given an array of n integers. You want to modify the array so that the signs of the numbers strictly alternate between positive and negative, starting with a positive number for the first element.
+
+Zero is not allowed in the final array.
+
+On each move, you may either increase or decrease the value of any element by one. What is the minimum number of moves required to achieve this alternating pattern?
+
+Input
+The first input line contains an integer n: the size of the array. Then, the second line contains n integers x1, x2, ..., xn: the contents of the array.
+
+Output
+Print the minimum number of moves.
+
+Constraints
+ 1 <= n <= 2 * 10^5
+ -10^9 <= x_i <= 10^9
+
+Example
+Input:
+4
+1 -3 0 2
+
+Output:
+4
+
+August Backman

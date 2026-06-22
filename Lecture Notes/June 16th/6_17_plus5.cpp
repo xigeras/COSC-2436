@@ -65,6 +65,7 @@ class LinkedList{
       }
 };
 
+enum Day { MONDAY = 0, TUESDAY = 1, WEDNESDAY = 2, THURSDAY = 3, FRIDAY = 4, SATURDAY = 5, SUNDAY = 6 };
 int main() {
    srand(time(0));
 
@@ -73,41 +74,35 @@ int main() {
       days[i] = new LinkedList();
    }
 
-   int targetDay = 2;
-   bool keepGoing = true;
+   Day targetDay = WEDNESDAY;
+   bool targetFound = false;
 
-   while (keepGoing) {
+   while (!targetFound) {
       int randNum = rand() % 70;
       int assignDayIndex = randNum / 10;
 
       days[assignDayIndex]->addAtBeg(randNum);
-      cout << "Generated " << randNum << " -> Added to index " << assignDayIndex << "\n";
 
-      switch(targetDay) {
-         case 0: // monday
-            if (randNum >= 0 && randNum <= 9) keepGoing = false;
-            break;
-         case 1: 
-            if (randNum >= 10 && randNum <= 19) keepGoing = false;
-            break;
-         case 2:
-            if (randNum >= 20 && randNum <= 29) keepGoing = false;
-            break;
-         case 3:
-            if (randNum >= 30 && randNum <= 39) keepGoing = false;
-            break;
-         case 4:
-            if (randNum >= 40 && randNum <= 49) keepGoing = false;
-            break;
-         case 5:
-            if (randNum >= 50 && randNum <= 59) keepGoing = false;
-            break;
-         case 6:
-            if (randNum >= 60 && randNum <= 69) keepGoing = false;
-            break;
+      cout << "Generated: " << randNum << " -> Added to Day [" << assignDayIndex << "]\n";
+
+      if (assignDayIndex == targetDay) {
+         targetFound = true;
       }
    }
 
-   cout << "\nLoop stopped, target hit."
+   cout << "\n=== FINAL HASH TABLE ===\n";
+   string dayNames[] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+
+   for (int i = 0; i < 7; i++) {
+      cout << dayNames[i] << " (" << i*10 << "-" >> (i*10)+9 << "): ";
+      days[i]->print();
+   }
+
+   for (int i = 0; i < 7; i++) {
+      delete days[i];
+   }
+   delete[] days;
+
    return 0;
 }
+

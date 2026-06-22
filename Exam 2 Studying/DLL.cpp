@@ -1,139 +1,117 @@
 #include <iostream>
+using namespace std;
 
-struct Node{
+struct Node {
     int val;
     Node* next;
     Node* prev;
-    Node(int val) : value(val), prev(nullptr), next(nullptr) {};
+    Node(int v) : val(v), prev(nullptr), next(nullptr) {}
 };
 
-class doublyList{
-    private:
-        Node* head;
-        Node* tail;
-    public:
-        doublyList();
-        void insertAtHead(int d) {
-            Node *tmp = new Node(d);
-            if (head == nullptr) {
-                head = tmp;
-                return;
-            }
+class doublyList {
+private:
+    Node* head;
+    Node* tail;
+    int size;
+
+public:
+    doublyList() : head(nullptr), tail(nullptr), size(0) {}
+
+    int getSize() { return size; }
+
+    void insertAtHead(int d) {
+        Node* tmp = new Node(d);
+        if (head == nullptr) {
+            head = tail = tmp;
+        } else {
             tmp->next = head;
             head->prev = tmp;
             head = tmp;
         }
-        void insertAtTail(int d) {
-            Node *tmp = new Node(d);
-            if (head == nullptr) {
-                head = tmp;
-                return;
-            }
-            Node *cur = head;
-            while (cur->next != nullptr) {
-                cur = cur->next;
-            }
-            cur->next = tmp;
-            tmp->prev = cur;
-        }
-        void insertAtIndex(int index, int d) {
-            if (d <= 0) {
-                insertAtHead(d);
-                return;
-            }
-            else if (d >= getSize()) {
-                insertAtTail(d);
-                return;
-            } 
+        size++;
+    }
 
-            Node *cur = head;
-            for (int i = 0; i < index - 1; i++) {
-                cur = cur->next;
-            }
-            Node *tmp = new Node(d);
-            tmp->next = cur->next;
-            cur->next = tmp;
-            tmp->prev = cur;
-            tmp->next->prev = tmp;
+    void insertAtTail(int d) {
+        Node* tmp = new Node(d);
+        if (tail == nullptr) { // List is empty
+            head = tail = tmp;
+        } else {
+            tail->next = tmp;
+            tmp->prev = tail;
+            tail = tmp; // Instantly update tail without a while loop!
         }
-        void removeHead() {
-            if (head == nullptr)
-                return;
-            else if (head->next == nullptr) {
-                removeHead();
-                return;
-            }
-            
-            Node *tmp = head;
+        size++;
+    }
+
+    void insertAtIndex(int index, int d) {
+        if (index <= 0) {
+            insertAtHead(d);
+            return;
+        }
+        if (index >= size) {
+            insertAtTail(d);
+            return;
+        }
+
+        Node* cur = head;
+        for (int i = 0; i < index - 1; i++) {
+            cur = cur->next;
+        }
+        
+        Node* tmp = new Node(d);
+        tmp->next = cur->next;
+        tmp->prev = cur;
+        
+        if (cur->next != nullptr) {
+            cur->next->prev = tmp;
+        }
+        cur->next = tmp;
+        size++;
+    }
+
+    void removeHead() {
+        if (head == nullptr) return;
+
+        Node* tmp = head;
+        if (head == tail) { // Only one node in the list
+            head = tail = nullptr;
+        } else {
             head = head->next;
-            delete tmp;
-            if (head != nullptr) 
-                head->prev = nullptr;
-            return head;
+            head->prev = nullptr;
         }
-        void removeTail() {
-            if (head == nullptr)
-                return;
+        delete tmp;
+        size--;
+    }
 
-            Node *cur = head;
-            Node *prev = nullptr;
-            //iterate cur until cur->next==nullptr. iterate prev with it
-            while (cur->next != nullptr) {
-                prev = cur;
-                cur = cur->next;
-            }
-            prev->next = nullptr;
-            delete cur;
-            return head;
+    void removeTail() {
+        if (tail == nullptr) return;
+
+        Node* tmp = tail;
+        if (head == tail) { // Only one node
+            head = tail = nullptr;
+        } else {
+            tail = tail->prev;
+            tail->next = nullptr;
         }
-        void removeAtPos() {
-            if (head == nullptr)
-                return;
-            else if (pos == 0) {
-                removeAtHead();
-                return;
-            }
+        delete tmp;
+        size--;
+    }
 
-            Node* cur = head;
-            Node* prev = nullptr;
+    void removeAtPos(int pos) {
+        if (pos < 0 || pos >= size || head == nullptr) return;
+        if (pos == 0) { removeHead(); return; }
+        if (pos == size - 1) { removeTail(); return; }
 
-            //loop
-            for (int i = 0; i < pos; i++) {
-                if (cur == nullptr)
-                    return;
-                prev = cur;
-                cur = cur->next;
-            }
-
-            if (cur == nullptr)
-                return;
-            else if (cur->next != nullptr)
-                cur->next->prev = prev;
-            prev->next = cur->next;
-            delete cur;
-
-
-            
-        }
-        void insertAfterValue(Node* head, int target, int newVal) {
-            Node* curr = head;
-
-            while (curr != nullptr && curr->val != target) {
-                curr = curr->next;
-            }
-
-            if (curr != nullptr) {
-                Node* tmp = new Node();
-                tmp->val = newVal;
-
-                tmp->next = curr->next;
-                tmp->prev = curr;
-
-                if (curr->next != nullptr) {
-                    curr->next->prev = tmp;
-                }
-                curr->next = tmp;
-            }
+        Node* cur = head;
+        for (int i = 0; i < pos; i++) {
+            cur = cur->next;
         }
 
-}
+        // Bridge the gap around cur
+        cur->prev->next = cur->next;
+        cur->next->prev = cur->prev;
+        
+        delete cur;
+        size--;
+    }
+};

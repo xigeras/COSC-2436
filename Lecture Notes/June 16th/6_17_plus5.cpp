@@ -33,3 +33,81 @@ Then at the end print out all list with a for loop.
 
 
 */
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+struct Node{
+   int data;
+   Node* next;
+   Node(int val) : data(val), next(nullptr) {}
+};
+
+class LinkedList{
+   public:
+      Node* head;
+      LinkedList() : head(nullptr) {}
+
+      void addAtBeg(int val) {
+         Node* tmp = new Node(val);
+         tmp->next = head;
+         head = tmp;
+      }
+      void print() {
+         Node* curr = head;
+         while (curr != nullptr) {
+            cout << curr->data << " -> ";
+            curr = curr->next;
+         }
+         cout << "NULL\n"
+      }
+};
+
+int main() {
+   srand(time(0));
+
+   LinkedList** days = new LinkedList*[7];
+   for (int i = 0; i < 7; i++) {
+      days[i] = new LinkedList();
+   }
+
+   int targetDay = 2;
+   bool keepGoing = true;
+
+   while (keepGoing) {
+      int randNum = rand() % 70;
+      int assignDayIndex = randNum / 10;
+
+      days[assignDayIndex]->addAtBeg(randNum);
+      cout << "Generated " << randNum << " -> Added to index " << assignDayIndex << "\n";
+
+      switch(targetDay) {
+         case 0: // monday
+            if (randNum >= 0 && randNum <= 9) keepGoing = false;
+            break;
+         case 1: 
+            if (randNum >= 10 && randNum <= 19) keepGoing = false;
+            break;
+         case 2:
+            if (randNum >= 20 && randNum <= 29) keepGoing = false;
+            break;
+         case 3:
+            if (randNum >= 30 && randNum <= 39) keepGoing = false;
+            break;
+         case 4:
+            if (randNum >= 40 && randNum <= 49) keepGoing = false;
+            break;
+         case 5:
+            if (randNum >= 50 && randNum <= 59) keepGoing = false;
+            break;
+         case 6:
+            if (randNum >= 60 && randNum <= 69) keepGoing = false;
+            break;
+      }
+   }
+
+   cout << "\nLoop stopped, target hit."
+   return 0;
+}

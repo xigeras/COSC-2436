@@ -1,5 +1,5 @@
 void selectionSort(int a[], int n) {
-    int minIndex
+    int minIndex;
 
     for (int i = 0; i < n - 1; i++) {
         minIndex = i;

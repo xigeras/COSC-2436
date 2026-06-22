@@ -10,42 +10,42 @@ void mergeSort(int arr[], int begin, int end) {
 }
 
 void merge(int arr[], int left, int mid, int right){
-	int leftSubArray = mid - left + 1;
-	int rightSubArray = right - mid;
+	int leftSA = mid - left + 1;
+	int rightSA = right - mid;
 
-	int leftArray[leftSubArray], rightArray[rightSubArray];
+	int leftArr[leftSA], rightArr[rightSA];
 
-	for (int i =0; i < leftSubArray; i++) 
-		leftArray[i] = arr[left + i];
+	for (int i =0; i < leftSA; i++) 
+		leftArr[i] = arr[left + i];
 
-	for (int j = 0; i < rightSubArray, j++) 
-		rightArray[i] = arr[mid + 1 + j];
+	for (int j = 0; i < rightSA; j++) 
+		rightArr[i] = arr[mid + 1 + j];
 
-	int indexOfLeftSubArray = 0;
-	int indexOfRightSubArray = 0;
-	int indexofMergedArray = left;
+	int indexLSA = 0;
+	int indexRSA = 0;
+	int indexMergeARR = left;
 
-	while(indexOfLeftSubArray < leftSubArray && indexOfRightSubArray < rightSubArray) {
-		if (leftArray[indexofLeftSubArray] <= rightArray[indexOfRightSubArray]) {
-			arr[indexOfMergedArray] = leftArray[indexOfLeftSubArray];
-			indexOfLeftSubArray++;
+	while(indexLSA < leftSA && indexRSA < rightSA) {
+		if (leftArr[indexLSA] <= rightArr[indexRSA]) {
+			arr[indexMergeARR] = leftArr[indexLSA];
+			indexLSA++;
 		} else {
-			arr[indexOfMergedArray] = rightArray[indexOfRightSubArray];
-			indexOfRightSubArray++;
+			arr[indexMergeARR] = rightArr[indexRSA];
+			indexRSA++;
 		}
 
-		indexOfMergedArray++;
+		indexMergeARR++;
 	}
 
-	while(indexOfLeftSubArray < leftSubArray) {
-		arr[indexOfMergedArray] = leftArray[indexOfLeftSubArray];
-		indexOfLeftSubArray++;
-		indexOfMergedArray++;
+	while(indexLSA < leftSA) {
+		arr[indexMergeARR] = leftArr[indexLSA];
+		indexLSA++;
+		indexMergeARR++;
 	}
-	while (indexOfRightSubArray < rightSubArray) {
-		arr[indexOfMergedArray] = rightArray[indexOfRightSubArray];
-		indexOfRightSubArray++;
-		indexOfMergedArray++;
+	while (indexRSA < rightSA) {
+		arr[indexMergeARR] = rightArr[indexRSA];
+		indexRSA++;
+		indexMergeARR++;
 	}
 }
 

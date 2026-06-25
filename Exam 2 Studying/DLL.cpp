@@ -114,4 +114,35 @@ public:
         delete cur;
         size--;
     }
+
+    void reverseList(Node*& head, Node*&tail) {
+        if (head == nullptr || head->next == nullptr) {
+            return;
+        }
+
+        Node* curr = head;
+        Node* tmp = nullptr;
+
+        while (curr != nullptr) {
+            tmp = curr->prev;
+            curr->prev = curr->next;
+            curr->next = tmp;
+
+            curr = curr->prev;
+        }
+        tail = head;
+        head = tmp->prev;
+    }
+
+    bool contains(int target) {
+        Node* curr = head;
+
+        while (curr != nullptr) {
+            if (curr->val == target) {
+                return true;
+            }
+            curr = curr->next;
+        }
+        return false;
+    }
 };

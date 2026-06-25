@@ -74,13 +74,26 @@ public:
 
         Node* tmp = head;
         if (head == tail) { // Only one node in the list
-            head = tail = nullptr;
+            head = nullptr; 
+            tail = nullptr;
         } else {
             head = head->next;
             head->prev = nullptr;
         }
         delete tmp;
-        size--;
+    }
+
+    void insertAfter(Node* target, int val) {
+        if (target == nullptr) return;
+
+        Node* newNode = new Node(val);
+        newNode->next = target->next;
+        newNode->prev = target;
+
+        if (target->next != nullptr) {
+            target->next->prev = newNode;
+        }
+        target->next = newNode; 
     }
 
     void removeTail() {

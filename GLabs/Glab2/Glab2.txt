@@ -1,0 +1,66 @@
+Glab2_1
+---------------------------------------------------------
+Name of the Problem: Post Office Weights
+Time Limit: 1.00 s Memory Limit: 512 MB
+
+Consider a shipping system consisting of n standard weight blocks where each block has a positive integer weight. 
+
+Your task is to balance a package of total weight x using the available blocks in such a way that the total number of blocks used is minimized. You may use each weight block value as many times as needed.
+
+Input
+The first input line has two integers, n (the number of weight blocks) and x (the desired total weight).
+The second line has n distinct integers w1, w2, ... wn: the value of each weight block.
+
+Output
+Print one integer representing the minimum number of blocks required. If it is not possible to produce the exact target weight, print -1. 
+
+Constraints
+1 <= n <= 100
+1 <= x <= 10^6
+1 <= w_i <= 10^6
+
+Example
+Input:
+3 11
+1 5 7
+
+Output:
+3
+
+
+August Backman
+
+
+
+Glab2_2
+---------------------------------------------------------
+Name of the Problem: Server Peak Load
+Time Limit: 1.00 s Memory Limit: 512 MB
+
+You are monitoring a cloud data center hosting n virtual servers. Each server runs continuously between a specific start timestamp a and an end timestamp b.
+
+Your task is to determine the peak simultaneous server load, which is the maximum number of servers running at the exact same moment.
+
+Input
+The first input line contains an integer n: the number of servers. After this, there are n lines that describe the active intervals.
+Each line has two integers a and b representing the startup and shutdown times of a server. You may assume that all startup and shutdown times are distinct.
+
+Output
+Print one integer representing the maximum number of concurrently active servers.
+
+Constraints
+1 <= n <= 2 * 10^5
+1 <= a <= b <= 10^9
+
+
+Example
+Input:
+3
+5 8 
+2 4
+3 9 
+
+Output:
+2
+
+August Backman

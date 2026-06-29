@@ -1,4 +1,5 @@
-#include <iostream>
+#ifndef BST_H
+#define BST_H
 
 struct Node{
     Node *left;
@@ -12,9 +13,16 @@ class BST{
         Node *root;
     public:
         BST();
+        ~BST();
+
         bool isEmpty();
         void insert(Node *curr, int x);
         bool search(Node *curr, int key);
-        void inorderTraversal(Node *);
-        void delete(Node *curr, int &x);
+        void preOrder(Node *curr);
+        void inOrder(Node *curr);
+        void postOrder(Node *curr);
+        void levelOrder(Node* curr);
+        void delete(Node *curr);
 };
+
+#endif

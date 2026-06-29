@@ -1,6 +1,11 @@
 #include "bst.h"
 #include <iostream>
+#include <queue>
 using namespace std;
+
+BST::BST() : root(nullptr) {}
+
+BST::~BST() { destroy(root); }
 
 void BST::insert(Node* curr, int x) {
     if (curr == nullptr) {
@@ -32,7 +37,7 @@ bool BST::search(Node* curr, int key) {
         }
     }
 }
-bool delete(Node* curr, int key) {
+bool BST::delete(Node* curr, int key) {
     Node* tmp = search(curr, key);
     if (tmp == nullptr) return false; // delete wasn't successful
     if (tmp->left == 0 && tmp->right == 0){
@@ -54,19 +59,46 @@ bool delete(Node* curr, int key) {
     }
 }
 
-Node* findMin(Node* curr) {
-    if (curr->left == nullptr) {
-        return curr;
-    } else {
-        findMin(curr->left);
-    }
+void BST::preOrder(Node* curr) {
+    if (curr == nullptr) return;
+
+    cout << curr->value << " " << endl;
+    preOrder(curr->left);
+    preOrder(curr->right);
 }
-// find max
-Node* findMax(Node* curr) {
-    if (curr->right == nullptr) {
-        return cu;
-    } else { 
-        findMax(curr->right);
+
+void BST::inOrder(Node* curr) {
+    if (curr == nullptr) return;
+
+    inOrder(curr->left);
+    cout << curr->value << " " << endl;
+    inOrder(curr->right);
+}
+
+void BST::postOrder(Node* curr) {
+    if (curr == nullptr) return;
+
+    postOrder(curr->left);
+    postOrder(curr->right);
+    cout << curr->value << " " << endl;
+}
+
+void BST::levelOrder(Node* curr) {
+    if (!curr) return;
+
+    queue<Node*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        Node* n = q.front();
+        q.pop();
+        cout << n->data << " ";
+
+        if (n->left) {
+            q.push(n->left);
+        } if (n->right) {
+            q.push(n->right);
+        }
     }
 }
 

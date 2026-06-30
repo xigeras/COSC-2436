@@ -1,3 +1,0 @@
-5
-Quadratic probing
-11,21,32,17,6

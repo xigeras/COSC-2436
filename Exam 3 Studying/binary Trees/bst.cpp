@@ -8,23 +8,17 @@ BST::BST() : root(nullptr) {}
 BST::~BST() { destroy(root); }
 
 void BST::insert(Node* curr, int x) {
-    if (curr == nullptr) {
-        Node *tmp = new Node(x);
-        curr = tmp;
-    } else {// go right or left 
-        if (x < curr->val) {
-            insert(cu->left, x);
-        } else if (x > curr->val) {
-            insert(curr->right, x);
-        } else {
-            cout << "x already exists.";
-            return;
-        }
+    if (!curr) {
+        curr = new Node(x);
+    } else if (value < curr->data) {
+        insert(curr->left, value);
+    } else if (value > curr->data) {
+        insert(curr->right, value);
     }
 }
 
 bool BST::search(Node* curr, int key) {
-    if (curr == nullptr) return false;
+    if (!curr) return false;
     
     if (curr->val == key) {
         return true;
@@ -37,25 +31,11 @@ bool BST::search(Node* curr, int key) {
         }
     }
 }
-bool BST::delete(Node* curr, int key) {
-    Node* tmp = search(curr, key);
-    if (tmp == nullptr) return false; // delete wasn't successful
-    if (tmp->left == 0 && tmp->right == 0){
-        Node* mark = tmp;
-        // empty
-        delete mark;
-    } else if (tmp->left == 0 || tmp->right == 0) {
-        if (tmp->left == 0) {
-            swap with temp->right
-            delete(swapped)
-        } else {
-            swap with tmp->left
-            delete(swapped)
-        }
-        delete(swapped)
-    } else {
-        swap min of right
-        delete
+void BST::destroy(Node* curr) {
+    if (curr) {
+        destroy(curr->left);
+        destroy(curr->right);
+        delete curr;
     }
 }
 
@@ -94,11 +74,8 @@ void BST::levelOrder(Node* curr) {
         q.pop();
         cout << n->data << " ";
 
-        if (n->left) {
-            q.push(n->left);
-        } if (n->right) {
-            q.push(n->right);
-        }
+        if (n->left) q.push(n->left); 
+        if (n->right) q.push(n->right);
     }
 }
 

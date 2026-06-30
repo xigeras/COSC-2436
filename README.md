@@ -1,0 +1,1 @@
+These are my COSC 2436 assignments and lecture notes from Summer 2026 at the University of Houston.
